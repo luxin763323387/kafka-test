@@ -10,4 +10,6 @@ public class Constants {
 
     public static final String KEY = "kafka_key";
 
+    public static final String KEY2 = "key2";
+
 }

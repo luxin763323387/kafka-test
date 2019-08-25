@@ -15,26 +15,27 @@ import java.util.Map;
  * @date 2019/7/12
  */
 @Slf4j
-    public class CustomPartitioner implements Partitioner {
+public class CustomPartitioner implements Partitioner {
 
     /**
      * 决定分区
-     * @param topic topic
-     * @param key key
-     * @param keyBytes keyBytes
-     * @param value value
+     *
+     * @param topic       topic
+     * @param key         key
+     * @param keyBytes    keyBytes
+     * @param value       value
      * @param valueBytes1 valueBytes1
-     * @param cluster  集群配置
+     * @param cluster     集群配置
      * @return
      */
     @Override
     public int partition(
-                                    String topic,
-                                    Object key,
-                                    byte[] keyBytes,
-                                    Object value,
-                                    byte[] valueBytes1,
-                                    Cluster cluster) {
+            String topic,
+            Object key,
+            byte[] keyBytes,
+            Object value,
+            byte[] valueBytes1,
+            Cluster cluster) {
 
         List<PartitionInfo> partitionInfos = cluster.partitionsForTopic(topic);
         int numPartitions = partitionInfos.size();

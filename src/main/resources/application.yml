@@ -39,6 +39,7 @@ spring:
 
 
 
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.cn.lx.kafkatest.entity

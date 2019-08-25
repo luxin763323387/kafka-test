@@ -25,6 +25,7 @@ public class ProduceTest {
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("partitioner.class", "com.cn.lx.kafkatest.test.CustomPartitioner");
         props.put("retries",10);
+        props.put("max.in.flight.requests.per.connection",1);
         producer = new KafkaProducer<String, String>(props);
     }
 
@@ -68,7 +69,7 @@ public class ProduceTest {
 
     //异步
     private static void sendMessageAsynchronize(){
-        ProducerRecord<String,String> producerRecord = new ProducerRecord<>(Constants.TOPIC,Constants.KEY,"lx5");
+        ProducerRecord<String,String> producerRecord = new ProducerRecord<>(Constants.TOPIC,Constants.KEY2,"lx6");
         producer.send(producerRecord,new ProducerCallback());
         producer.close();
     }

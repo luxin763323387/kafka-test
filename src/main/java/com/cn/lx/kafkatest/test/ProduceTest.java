@@ -5,6 +5,7 @@ import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.common.errors.RetriableException;
 
 import java.util.Properties;
 
@@ -59,10 +60,14 @@ public class ProduceTest {
 
         @Override
         public void onCompletion(RecordMetadata metadata, Exception exception) {
-            if(exception != null){
-                exception.printStackTrace();
-            }else {
+            if(exception == null){
                 System.out.println("success=========");
+            }else {
+                if(exception instanceof RetriableException){
+                    //处理可重试瞬时异常
+                }else {
+                    //处理不可重试异常
+                }
             }
         }
     }

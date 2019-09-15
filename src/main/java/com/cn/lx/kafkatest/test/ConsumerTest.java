@@ -6,7 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.springframework.util.CollectionUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +26,7 @@ public class ConsumerTest {
     static {
         props = new Properties();
 
-        props.put("bootstrap.servers", "47.99.127.204:9092");
+        props.put("bootstrap.servers", "127.0.0.1:9092");
         props.put("key.deserializer",
                 "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer",
@@ -43,7 +45,7 @@ public class ConsumerTest {
 
 
     /**
-     * 轮询
+     * 同步轮询
      */
     private static void generalConsumeMessageAutoCommit(){
         props.put("enable.auto.commit", true);
@@ -72,10 +74,44 @@ public class ConsumerTest {
         }
     }
 
+    /**
+     * 异步+同步提交
+     */
+    public static void generalConsumeMessageSyncCommit(){
+
+        props.put("enable.auto.commit",false);
+        consumer = new KafkaConsumer<String, String>(props);
+        consumer.subscribe(Collections.singleton(Constants.TOPIC));
+
+        try {
+            while (true){
+                ConsumerRecords<String,String> records = consumer.poll(100);
+                for (ConsumerRecord<String, String> record : records) {
+                    log.info("topic = %s, partition = %s, offset = %d, customer = %s, country = S\n",
+                            record.topic(),record.partition(),record.offset(),record.key(),record.value());
+                }
+                consumer.commitAsync();
+            }
+        }catch (Exception e){
+            log.error("Unexpected error",e);
+        }finally {
+            try{
+                consumer.commitSync();
+            }finally {
+                consumer.close();
+        }
+
+        }
+
+
+    }
+
+
 
     public static void main(String[] args) {
 
         //consumeMessage();
-        generalConsumeMessageAutoCommit();
+        //generalConsumeMessageAutoCommit();
+        generalConsumeMessageSyncCommit();
     }
 }

@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @SpringBootTest
@@ -41,5 +44,15 @@ public class UserServiceImplTest {
 
         Response response = userService.dropUser2(user);
         System.out.println(JSON.toJSONString(response));
+    }
+
+    @Test
+    public void addUsers(){
+        List<User> users = new ArrayList<>();
+        users.add(new User("lx1","1234","1234"));
+        users.add(new User("lx2","1234","1234"));
+        users.add(new User("lx3","1234","1234"));
+        users.add(new User("lx4","1234","1234"));
+        int i = userService.addUsers(users);
     }
 }

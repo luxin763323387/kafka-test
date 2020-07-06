@@ -18,6 +18,12 @@ public class User {
 
     private String phone;
 
+    public User(String username,String password, String phone){
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+    }
+
     public ErrorCode validate(UserMapper userMapper){
 
         if(null == userMapper.selectByPrimaryKey(userid)){

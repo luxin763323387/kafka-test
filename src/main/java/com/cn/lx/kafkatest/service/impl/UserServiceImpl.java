@@ -14,8 +14,10 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Future;
 
@@ -35,7 +37,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User queryById(Integer id) {
+        User user = new User();
+        user.setPassword("123456");
+        user.setPhone("123456");
+        user.setUserid(1003);
+        user.setUsername("23");
+        userMapper.updateByPrimaryKey(user);
         return userMapper.selectByPrimaryKey(id);
     }
 
@@ -89,6 +98,11 @@ public class UserServiceImpl implements IUserService {
             producer.close();
         }
         return response;
+    }
+
+    @Override
+    public int addUsers(List<User> users) {
+        return userMapper.insertUsers(users);
     }
 
 }

@@ -9,9 +9,9 @@ spring:
     druid:
       filters: stat
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://134.175.57.240:3306/kafka?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
+      url: jdbc:mysql://127.0.0.1:3306/kafka?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
       username: root
-      password: Luxin19951029!@#
+      password: root
       initial-size: 1
       min-idle: 1
       max-active: 20

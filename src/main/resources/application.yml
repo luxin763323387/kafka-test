@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 
 spring:
@@ -9,9 +9,9 @@ spring:
     druid:
       filters: stat
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://47.99.127.204:3306/kafka?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
+      url: jdbc:mysql://127.0.0.1:3306/kafka?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=UTC
       username: root
-      password: Luxin19951029!@#
+      password: root
       initial-size: 1
       min-idle: 1
       max-active: 20
@@ -29,7 +29,7 @@ spring:
     port: 6379
 
   kafka:
-     bootstrap-servers: 47.99.127.204:9092
+     bootstrap-servers: 127.0.0.1:9092
      consumer:
        group-id: passbook
      listener:

@@ -16,6 +16,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Future;
 
@@ -89,6 +90,11 @@ public class UserServiceImpl implements IUserService {
             producer.close();
         }
         return response;
+    }
+
+    @Override
+    public int addUsers(List<User> users) {
+        return userMapper.insertUsers(users);
     }
 
 }

@@ -17,22 +17,28 @@ public class Test {
 
     public static void main(String[] args) {
 
-        List<User> users = new ArrayList<>();
-        users.add(new User("1","lx",18));
-        users.add(new User("2","ls",19));
-        users.add(new User("123","ll",20));
+//        List<User> users = new ArrayList<>();
+//        users.add(new User("1","lx",18));
+//        users.add(new User("2","ls",19));
+//        users.add(new User("123","ll",20));
+//
+//        List<String> list = users.stream()
+//                .map(User::getId)
+//                .collect(Collectors.toList());
+//        List<Integer> ages = users.stream()
+//                .map(User::getAge)
+//                .collect(Collectors.toList());
+//
+//        System.out.println(list);
+//        System.out.println(JSON.toJSON(list));
+//        System.out.println(ages);
+//        System.out.println(JSON.toJSON(ages));
 
-        List<String> list = users.stream()
-                .map(User::getId)
-                .collect(Collectors.toList());
-        List<Integer> ages = users.stream()
-                .map(User::getAge)
-                .collect(Collectors.toList());
+        String  test = "POS_STOREID:102914";
+        String pos_storeid = test.replace("POS_STOREID:", "");
+        Integer i = Integer.valueOf(pos_storeid);
 
-        System.out.println(list);
-        System.out.println(JSON.toJSON(list));
-        System.out.println(ages);
-        System.out.println(JSON.toJSON(ages));
+        System.out.println(i.equals(102914));
     }
 
 

@@ -38,7 +38,7 @@ public class Test {
         String pos_storeid = test.replace("POS_STOREID:", "");
         Integer i = Integer.valueOf(pos_storeid);
 
-        System.out.println(i.equals(102914));
+        System.out.println(i.equals(102915));
     }
 
 
